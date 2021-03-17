@@ -5,4 +5,6 @@ public interface IMotion {
   public int getStartTick();
 
   public int getEndTick();
+
+  public String toString();
 }

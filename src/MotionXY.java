@@ -30,4 +30,11 @@ public class MotionXY implements IMotion{
     return new AShape(shape.getId(), this.x, this.y, shape.getW(), shape.getH(), shape.getR(), shape.getG(),
         shape.getB());
   }
+
+  @Override
+  public String toString() {
+    String out = "";
+
+    return "" + startTick + shape.get
+  }
 }

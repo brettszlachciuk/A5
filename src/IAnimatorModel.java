@@ -13,4 +13,6 @@ public interface IAnimatorModel {
   void removeShape(AShape shape);
 
   void addMotion(AShape shape, IMotion motion);
+
+  String toString();
 }

@@ -5,6 +5,13 @@ import java.util.Map;
 
 public class AnimatorModel implements IAnimatorModel{
 
+
+  //I think we need the frame class. After, we will have a
+  //Map<AShape, List<Frame>. this way we can see the beginning state of the shape, represented by the
+  //AShape in the frame class, then we can obtain the info of the shape's state after the motion and how the motion
+  //transformed it by using the new arguments in the motion class.
+  //I ran into these problems when thinking about toString, but I think these changes would fix them.
+
   private Map<AShape, List<IMotion>> motionsByShape;
 
   private List<AShape> allShapes;
@@ -39,9 +46,8 @@ public class AnimatorModel implements IAnimatorModel{
     this.allShapes = allShapes;
     this.validAnimation();
 
-    for (Map.Entry element : motionsByShape.entrySet()) {
-      AShape s = (AShape) element.getKey();
-      List<IMotion> motions = (List<IMotion>) element.getValue();
+    for (Map.Entry<AShape, List<IMotion>> element : motionsByShape.entrySet()) {
+      List<IMotion> motions = element.getValue();
       sortByTick(motions);
     }
   }
@@ -125,12 +131,28 @@ public class AnimatorModel implements IAnimatorModel{
     motionsByShape.put(shape, currMotions);
   }
 
+  @Override
+  public String toString() {
+    //Improvement: come up with a way to organize all motions by class in the toString method.
+    String out = "";
+
+    for (Map.Entry<AShape, List<IMotion>> element : motionsByShape.entrySet()) {
+      AShape shape = element.getKey();
+      List<IMotion> motions = element.getValue();
+
+      //figuring out how to obtain the before and after shape details of each motion
+      String motioninfo = shape.toString() + " " +
+    }
+
+    return out;
+  }
+
   private boolean checkMotions(int frame) {
     int target = allShapes.size() - 1;
     int correctMotions = 0;
 
-    for (Map.Entry element : motionsByShape.entrySet()) {
-      List<IMotion> motions = (List<IMotion>) element.getValue();
+    for (Map.Entry<AShape, List<IMotion>> element : motionsByShape.entrySet()) {
+      List<IMotion> motions = element.getValue();
 
       for (IMotion motion: motions) {
         if (motion.getStartTick() <= frame && motion.getEndTick() >= frame) {
@@ -143,9 +165,8 @@ public class AnimatorModel implements IAnimatorModel{
   }
 
   private boolean noOverlaps() {
-    for (Map.Entry element : motionsByShape.entrySet()) {
-      AShape s = (AShape) element.getKey();
-      List<IMotion> motions = (List<IMotion>) element.getValue();
+    for (Map.Entry<AShape, List<IMotion>> element : motionsByShape.entrySet()) {
+      List<IMotion> motions = element.getValue();
 
       //separate motions in the list of motions by class and check this for each class
       for (int i = 0; i < motions.size() - 2; i++) {
@@ -186,5 +207,7 @@ public class AnimatorModel implements IAnimatorModel{
     }
     return sortedMotions;
   }
+
+
 
 }
