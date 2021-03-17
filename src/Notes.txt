@@ -1,0 +1,33 @@
+
+  //Focus only on storing shapes, adding shapes to animation, getting the positions of all shapes
+  //in the animation, and making sure there are no incorrect states added to the animation
+  //such as contradictory states for a certain shape etc.
+  //Motion interface with beginning and end attributes. motion
+  //overlapping motions
+  //no gaps in tick: all ticks must be covered by some motion
+  //two consecutive motions: end position of first motion should match start of second
+  //we will get a file reader/builder in the second assignment
+  //two approaches to add motions: with start time, all arguments, start val and end val
+  //addmotion(starttime, endtime): just mutate x and y works, but adding color change would make previous motion mutate
+  //solution: addmovemotion, addcolorchangemotion, addsizechangemotion ... removes dependence on other parameters
+  //make an apply method with motions as functions that are applied to shapes. Apply method takes in tick,
+  //if tick is between start and end time of motion predicate, motion predicate will apply to shape.
+  //Would have to be called on every motion. Could fix with a map: key is frame, value is motion. Maintain sorted list and find range.
+  //3 different lists: getcolorat, getshapeat, getmotionat. overlapping transformations are allowed but not of the same type
+  //functions are commands applied on the shape
+  //interface for any kind of motion in case there will be others in later assignments
+  //make textualview separate from model. toString is ok for this hw
+  //shape could be added after reading in whole text file.
+
+
+
+  //IModel:
+  //either void addShape(String id, String Shape)
+  //void addRectangle(int... attributes)
+  //List<IShape> getallShapesAytFrame();
+  //List<String> getallshapeIDs();
+  //return shapes at each frame with unsupportedoperationexception
+  //changeheightandwidth
+  //changecolor
+
+
